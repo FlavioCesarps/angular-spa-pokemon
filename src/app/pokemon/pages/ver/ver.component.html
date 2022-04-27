@@ -1,0 +1,44 @@
+<div *ngIf="!pokemon; else divpoke" id="preloader"></div>
+
+<ng-template #divpoke>
+
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col-12">
+          <h1>Pokemon <small> {{ pokemon.name }} </small></h1>
+      </div>
+
+      <div class="row">
+        <br>
+        <div class="col-4">
+          <img *ngIf="url != null" [src]="url " class="img-thumbnail">
+          <img  *ngIf="url == null" src="../../../../assets/img/image.jpg " width="200px" class="img-thumbnail">
+
+        </div>
+      </div>
+
+      <div class="col">
+
+        <br>
+
+        <h3>Información</h3>
+        <ul class="list-group-item">
+          <li>Altura - {{ pokemon.height }}</li>
+          <li>Tamaño - {{ pokemon.weight }} cm</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Habilidades</h3>
+    <div class="row">
+      <div class="col">
+          <span class="badge badge-dark" style="color: blueviolet;" *ngFor="let item of type"> {{item}} </span>
+      </div>
+    </div>
+    <button class="btn btn-primary my-4" (click)="regresar()">Regresar</button>
+
+  </div>
+
+</ng-template>
+<app-footer></app-footer>
+
