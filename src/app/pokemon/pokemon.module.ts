@@ -8,17 +8,18 @@ import { PokemonRoutingModule } from './pokemon-routing.module';
 import { HomePokemonComponent } from './pages/home-pokemon.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SpecieComponent } from './pages/specie/specie.component';
 
 @NgModule({
-  declarations: [ListadoComponent, VerComponent,  HomePokemonComponent],
+  declarations: [ListadoComponent, VerComponent,  HomePokemonComponent, SpecieComponent],
   imports: [
     CommonModule,
-    PokemonRoutingModule,
+    NgxPaginationModule,
     SharedModule,
-    NgxPaginationModule
+    PokemonRoutingModule,
   ]
   ,exports:[
-    VerComponent
+    HomePokemonComponent
   ]
 })
 export class PokemonModule { }

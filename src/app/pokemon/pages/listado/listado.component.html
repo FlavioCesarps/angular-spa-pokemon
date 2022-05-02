@@ -1,19 +1,36 @@
-<div class="row">
+<div *ngIf="pokemons.length == 0; else divpok" id="preloader"></div>
+<ng-template #divpok>
+<section id="facts" class="facts">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Poke List</h2>
+      <p>
+        This list has the number in the National Pokédex and also the number in
+        the regional Pokédex, the name of the Pokémon and its characteristics.
+      </p>
+    </div>
 
-  <div *ngFor="let pokemon of pokemons |  paginate: { itemsPerPage: 12, currentPage: pageActual }"  class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-    <a [routerLink]="['/pokemon/ver', pokemon.id]">
-     <div  class="icon-box iconbox-blue">
-      <img  [src]="pokemon.pic" alt="" width="120px">
-
-
-        <h4> Order - {{pokemon.id}} </h4>
-        <p> {{pokemon.name}} </p>
-
+    <div class="row">
+      <div *ngFor="let pokemon of pokemons[0] | paginate: { itemsPerPage: 12, currentPage: pageActual } ; let i = index"  class="col-lg-3 col-md-6">
+        <a [routerLink]="['/pokemon/ver', pokemon.name]">
+          <div class="count-box">
+            <img [src]="pokemon.pic" alt="" width="120px" />
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="232"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <h4>{{ pokemon.name | titlecase }}</h4>
+            <p style="color: darkslategrey">Order - {{ pokemon.id }}</p>
+          </div>
+        </a>
       </div>
-    </a>
+
+      <br />
+
+      <pagination-controls class="mt-4" (pageChange)="pageActual = $event"></pagination-controls>
+    </div>
   </div>
-
-  <br><br>
-  <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
-
-</div>
+</section>
+</ng-template>

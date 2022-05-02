@@ -2,43 +2,63 @@
 
 <ng-template #divpoke>
 
-  <div class="container pt-4">
-    <div class="row">
-      <div class="col-12">
-          <h1>Pokemon <small> {{ pokemon.name }} </small></h1>
-      </div>
-
-      <div class="row">
-        <br>
-        <div class="col-4">
-          <img *ngIf="url != null" [src]="url " class="img-thumbnail">
-          <img  *ngIf="url == null" src="../../../../assets/img/image.jpg " width="200px" class="img-thumbnail">
-
-        </div>
-      </div>
-
-      <div class="col">
-
-        <br>
-
-        <h3>Información</h3>
-        <ul class="list-group-item">
-          <li>Altura - {{ pokemon.height }}</li>
-          <li>Tamaño - {{ pokemon.weight }} cm</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>Habilidades</h3>
-    <div class="row">
-      <div class="col">
-          <span class="badge badge-dark" style="color: blueviolet;" *ngFor="let item of type"> {{item}} </span>
-      </div>
-    </div>
-    <button class="btn btn-primary my-4" (click)="regresar()">Regresar</button>
+  <div class="section-title mt-5">
+    <h2>Pokémon <small style="color: blueviolet;"> {{ pokemon.name }} </small></h2>
 
   </div>
 
+  <div class="row">
+    <div class="col-lg-4 col-md-12 col-xs-12 info">
+
+      <div class="team-item wow fadeInRight" data-wow-delay="0.4s">
+        <div class="img-container">
+          <img *ngIf="url != null"   id="update_img" [src]="url" />
+          <img  *ngIf="url == null" src="../../../../assets/img/image.png " id="update_img">
+        </div>
+        <div class="detail-container">
+          <div class="title-container">
+            <h3 class="name text-center" id="update_name">{{pokemon.name}} - Shini</h3>
+            <hr class="seperator" />
+            <div class="stats text-center">
+              <span class="first cp-text col-md-6" id="update_hp"
+                >{{pokemon.order | number}} Order </span
+              >
+              <span class="cp-text col-md-6" id="update_cp">{{experiencia}} XP </span>
+            </div>
+          </div>
+          <button class="btn-transfer">TRANSFER</button>
+          <div class="attributes-container">
+            <div class="col attributes-content" style="min-width: 42%">
+              <p class="cp-text" id="update_type">
+                <span *ngFor="let item of type"> {{item.type.name}} </span>
+              </p>
+              <small class="text-muted">Type</small>
+            </div>
+            <div class="col attributes-content">
+              <p class="cp-text" id="update_weight">{{pokemon.weight}}kg</p>
+              <small class="text-muted">Weight</small>
+            </div>
+            <div class="col attributes-content">
+              <p class="cp-text no-border" id="update_height">{{pokemon.height}}m</p>
+              <small class="text-muted">Height</small>
+            </div>
+          </div>
+
+          <!-- </div> -->
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-lg-8 col-md-12 col-xs-12 wow fadeInRight" data-wow-delay="0.3s" >
+        <app-specie></app-specie>
+    </div>
+
+    <div class="text-left">
+      <button (click)="regresar()" class="btn btn-primary rounded-pill mt-5">
+      <i class="bi bi-arrow-left-short"></i> Back </button></div>
+  </div>
+
 </ng-template>
-<app-footer></app-footer>
+
 

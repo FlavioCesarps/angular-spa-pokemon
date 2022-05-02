@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PokemonService } from '../../services/pokemon.service';
 import { switchMap, tap } from 'rxjs/operators';
-import { Pokemon } from '../../interface/pokemonInterface';
+import { Pokemon, Type } from '../../interface/pokemonInterface';
 
 
 @Component({
   selector: 'app-ver',
   templateUrl: './ver.component.html',
-  styleUrls: ['../home-pokemon.component.css']
+  styleUrls: ['./ver.component.css']
 })
 export class VerComponent implements OnInit {
 
   pokemon!: Pokemon;
   url? : string;
-  type: string[]= [];
-
+  type?: Type[];
+  experiencia!: number;
 
   constructor( private activateRoute: ActivatedRoute, private pokemonService: PokemonService,
     private router:Router ) { }
@@ -29,12 +29,9 @@ export class VerComponent implements OnInit {
       ).subscribe( (resp:Pokemon) => {
 
       this.pokemon = resp;
-      this.type=[];
-      resp.types?.forEach((element) => {
-        this.type.push(element['type'].name);
-      });
-
-      this.url = resp.sprites?.front_shiny;
+      this.type = resp.types;
+      this.experiencia = (resp?.base_experience) ? resp?.base_experience : 0;
+      this.url = resp.sprites?.front_default;
 
         if( resp.id == null ){
           this.router.navigate(['/pokemon']);
